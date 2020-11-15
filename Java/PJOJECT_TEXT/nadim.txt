@@ -1,0 +1,10 @@
+drop table relation;
+create table relation(
+    Teachers_id NUMBER(*,0) NOT NULL,
+    Roll NUMBER(*,0) NOT NULL,
+    EMPLOYEE_ID NUMBER(*,0) NOT NULL,
+    primary key(Teachers_id,Roll,Employee_id),
+    foreign key(Teachers_id)references teacher_info,
+    foreign key(Roll)references student_info,
+    foreign key(Employee_id)references employee_info
+    );

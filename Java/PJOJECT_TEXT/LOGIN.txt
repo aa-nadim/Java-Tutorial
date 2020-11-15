@@ -1,0 +1,33 @@
+
+private void signinActionPerformed(java.awt.event.ActionEvent evt) {                                     
+        try{ Class.forName("oracle.jdbc.OracleDriver");
+            Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","SYSTEM","ASH");
+            String sql = "Select * from login where username=? and password = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, username.getText());
+            pst.setString(2, password.getText());
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                JOptionPane.showMessageDialog(null, "Username and Password Matched");
+                Succes field= new Succes();
+                field.setVisible(true);
+                setVisible(false);
+             
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Username and password not Correct");
+                username.setText("");
+                password.setText("");
+            }
+            con.close();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+     
+    }
+For Reset Button:
+private void resetActionPerformed(java.awt.event.ActionEvent evt) {                                      
+       username.setText("");
+       password.setText("");
+    }   

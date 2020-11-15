@@ -1,0 +1,126 @@
+drop table department;
+create table department(
+    dept_name varchar(20),
+    building varchar(10),
+    budget number,
+    primary key(dept_name)
+    );
+	insert into department values('CSTE','academic-1',200000);
+	insert into department values('ICE','academic-2',150000);
+	insert into department values('SWE','library',150000);
+	insert into department values('EEE','adminis..',150000);
+	insert into department values('ACCE','academic-1',150000);
+drop table Login;
+create table Login(
+    UserName varchar(20),
+    dept_name varchar(30),
+    id number,
+    Password varchar(10),
+    primary key(id)
+    );
+    	insert into Login values('Smith','ICE',1002,'abcd');
+    	insert into Login values('Morris','ICE',1003,'bcde');
+    	insert into Login values('Arif','ICE',1004,';efgh');
+    	insert into Login values('tourist','ICE',1005,'fghi');
+    	select * from Login;
+drop table s8;
+create table s8(
+    Course_code varchar(20),
+    Course_name varchar(30),
+    Credits number,
+    GPA varchar(10),
+    primary key(Course_code)
+    );
+drop table classroom;   
+create table classroom(
+    building varchar(10 char),
+    room_no number,
+    capaciy number,
+    primary key(building,room_no)
+    --primary key(room_no)
+    );
+drop table student;
+create table student(
+    id varchar(5),
+    name varchar(15 char),
+    dept_name varchar(20),
+    tot_cred numeric(2,0),
+    primary key(id),
+    foreign key(dept_name)references department
+    );
+drop table advisor;
+create table advisor(
+    s_id varchar(10),
+    i_id varchar(10),
+    foreign key(s_id)references student,
+    foreign key(i_id)references instructor
+    );
+drop table instructor;
+create table instructor(
+    id varchar(10),
+    name varchar(15 char),
+    dept_name varchar(20 char),
+    salary numeric(10,0),
+    primary key(id),
+    foreign key(dept_name)references department
+    );
+	insert into instructor values(10001,'Smith','CSTE',66000);
+drop table course;
+create table course(
+    course_id varchar(10),
+    title varchar(15 char),
+    dept_name varchar(20 char),
+    credits numeric(1,2),
+    primary key(course_id),
+    foreign key(dept_name)references department
+    );
+drop table prereq;
+create table prereq(
+    course_id varchar(10),
+    prereq_id varchar(10),
+    foreign key(course_id)references course
+    );
+drop table takes;
+create table takes(
+    id varchar(10),
+    course_id varchar(10),
+    sec_id varchar(10),
+    semester varchar(10),
+    year varchar(10),
+    grade varchar(10),
+    foreign key(id)references student,
+    foreign key(course_id,sec_id,semester,year)references section
+    );
+drop table time_slot;
+create table time_slot(
+    time_slot_id varchar(10),
+    day varchar(10),
+    start_time varchar(10),
+    end_time varchar(10),
+    primary key(time_slot_id)
+    );
+drop table teaches;
+create table teaches(
+    id varchar(10),
+    course_id varchar(10),
+    sec_id varchar(10),
+    semester varchar(10),
+    year varchar(10),
+    foreign key(id)references instructor,
+    foreign key(course_id,sec_id,semester,year)references section
+    );
+drop table section;
+create table section(
+    course_id varchar(10),
+    sec_id varchar(10),
+    semester varchar(10),
+    year varchar(10),
+    building varchar(10 char),
+    room_no number,
+    time_slot_id varchar(10),
+    primary key(course_id,sec_id,semester,year),
+    foreign key(course_id)references course,
+    foreign key(building,room_no)references classroom,
+    foreign key(time_slot_id)references time_slot
+    );
+

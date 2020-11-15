@@ -1,0 +1,9 @@
+Class.forName("oracle.jdbc.OracleDriver");
+            Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","SYSTEM","ASH");
+            String sql = "insert into member(id,name,phone,age,occupation)values(?,?,?,?,?)";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, id.getText());
+            pst.setString(2, name.getText());
+            pst.setString(3, phone.getText());
+            pst.setString(4, age.getText());
+            pst.setString(5, occupation.getText());

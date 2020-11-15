@@ -1,0 +1,15 @@
+
+package string_package;
+
+
+public class StringDemo8 {
+    public static void main(String args[]){  
+        
+	   String s="Sachin";  
+           
+	   s=s.concat(" Tendulkar");  
+           
+	   System.out.println(s);  
+	 }  
+
+}

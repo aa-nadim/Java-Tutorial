@@ -1,0 +1,24 @@
+
+private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {                                     
+        try{
+            Class.forName("oracle.jdbc.OracleDriver");
+            Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","SYSTEM","ASH");
+            String query = "insert into members(ID, NAME,PHONE, AGE, OCCUPATION)values(?,?,?,?,?)";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, id.getText());
+            pst.setString(2, name.getText());
+            pst.setString(3, phone.getText());
+            pst.setString(4, age.getText());
+            
+            String occ;
+            occ=occupation.getSelectedItem().toString();
+            pst.setString(5, occupation);
+            pst.executeUpdate();
+         
+            JOptionPane.showMessageDialog(null, "Inserted Sucessfully!");
+        }
+         catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+     
+    }   
